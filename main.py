@@ -109,7 +109,6 @@ def buildWordList(wordlist_names: list[str]) -> list[str]:
             # Read wordlist from EFF webpage
             filewords = downloadWordlist(name)
         words = words.union(filewords)
-        print(len(words))
     return list(words)
 
 
