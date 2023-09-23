@@ -31,20 +31,20 @@ local_url_dict = {'large' : {'local': os.path.join(local_wordlists_dirpath, 'EFF
 # -----------------------------------------------------------------------------
 def createParser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog= 'Passphrase generator', 
-                                     description= 'Generate np passphrases of lenght nw using EFF dice wordlists',
+                                     description= 'Generate p passphrases of lenght w words using EFF dice wordlists',
                                      epilog= 'Eduardo Castro, 2023')
     # Passphrase parameters
     parser.add_argument(
-        '-nw', 
-        '--n_words', 
+        '-w', 
+        '--words', 
         nargs= '?', 
         default= 7, 
         type= int,
         help= 'Number of words in the passphrases'
     )
     parser.add_argument(
-        '-np', 
-        '--n_passphrases', 
+        '-p', 
+        '--passphrases', 
         nargs= '?', 
         default= 1, 
         type= int,
@@ -135,7 +135,7 @@ def main() -> None:
     args = vars(parser.parse_args())
 
     # Verificate number of passphrases
-    assert args['n_passphrases'] > 0, 'Number of passphrases must be greiter than 0'
+    assert args['passphrases'] > 0, 'Number of passphrases must be greiter than 0'
 
     # Get usable wordlists filepaths
     usable_wordlists_names = [args[y] for y in local_url_dict.keys() if args[y]]
@@ -145,9 +145,9 @@ def main() -> None:
     
     wordlist = buildWordList(usable_wordlists_names)
     [print(generatePassphrase(wordlist= wordlist, 
-                             n_words= args['n_words'], 
+                             n_words= args['words'], 
                              separator= args['separator']))
-     for _ in range(args['n_passphrases'])]
+     for _ in range(args['passphrases'])]
 
 if __name__ == '__main__':
     main()
